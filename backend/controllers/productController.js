@@ -1,0 +1,1 @@
+exports.getAllProducts = (req, res) => {};
