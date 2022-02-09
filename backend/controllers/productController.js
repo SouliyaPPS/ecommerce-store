@@ -19,6 +19,21 @@ exports.getAllProducts = async (req, res) => {
   })
 }
 
+// get all products details
+exports.getProductsDetails = async (req, res) => {
+  const product = await Product.findById(req.params.id)
+  if (!product) {
+    return res.status(500).json({
+      success: false,
+      message: 'Product not found',
+    })
+  }
+  res.status(200).json({
+    success: true,
+    products,
+  })
+}
+
 // update a product by id
 exports.updateProduct = async (req, res, next) => {
   let product = await Product.findById(req.params.id)
@@ -30,6 +45,7 @@ exports.updateProduct = async (req, res, next) => {
     })
   }
 
+  // find and update product with new id
   product = await Product.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
     runValidators: true,
@@ -39,5 +55,24 @@ exports.updateProduct = async (req, res, next) => {
   res.status(200).json({
     success: true,
     product,
+  })
+}
+
+// delete a product from the store by id
+exports.deleteProduct = async (req, res, next) => {
+  const product = await Product.findById(req.params.id)
+
+  if (!product) {
+    return res.status(500).json({
+      success: false,
+      message: 'Product not found',
+    })
+  }
+
+  await product.remove()
+
+  res.status(200).json({
+    success: true,
+    message: 'Product deleted',
   })
 }
