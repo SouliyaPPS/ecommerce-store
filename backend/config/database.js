@@ -1,5 +1,5 @@
 // connect to the mongo db database
-const mongoose = require("mongoose");
+const mongoose = require('mongoose')
 
 // connect to the mongo db database
 const connectDatabase = () => {
@@ -10,11 +10,8 @@ const connectDatabase = () => {
       // useCreateIndex: true,
     })
     .then((data) => {
-      console.log(`Connected to MongoDB: ${data.connection.host}`);
+      console.log(`Connected to MongoDB: ${data.connection.host}`)
     })
-    .catch((err) => {
-      console.log(err);
-    });
-};
+}
 
-module.exports = connectDatabase;
+module.exports = connectDatabase
